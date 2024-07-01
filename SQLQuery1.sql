@@ -1,66 +1,48 @@
-CREATE DATABASE CodeAcademy;
-USE CodeAcademy;
+CREATE DATABASE LibraryManagement;
+USE LibraryManagement;
 
-CREATE TABLE Groups (
-    Id INT PRIMARY KEY,
-    Name VARCHAR(100),
-    BeginDate DATE,
-    EndDate DATE,
-    LessonHours INT
+CREATE TABLE Libraries (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(255) NOT NULL,
+    Address VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE GroupTypes (
-    Id INT PRIMARY KEY,
-    Name VARCHAR(100)
+CREATE TABLE Books (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(255) NOT NULL,
+    Count INT NOT NULL
 );
 
-CREATE TABLE Students (
-    Id INT PRIMARY KEY,
-    Name VARCHAR(100),
-    Surname VARCHAR(100),
-    BirthDate DATE,
-    RegistrationDate DATE,
-    PhoneNumber VARCHAR(20),
-    Email VARCHAR(100)
+CREATE TABLE Authors (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(255) NOT NULL,
+    Surname VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Topics (
-    Id INT PRIMARY KEY,
-    Name VARCHAR(100),
-    LessonHours INT
+CREATE TABLE Genres (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE ExerciseTypes (
-    Id INT PRIMARY KEY,
-    Name VARCHAR(100)
-);
+DROP TABLE Genres 
 
-CREATE TABLE Exercises (
-    Id INT PRIMARY KEY,
-    Name VARCHAR(100),
-    Grade DECIMAL(5,2),
-    Type INT,
-    FOREIGN KEY (Type) REFERENCES ExerciseTypes(Id)
-);
+INSERT INTO Libraries (Name, Address) VALUES ('Central Library', '123 Main St');
+INSERT INTO Libraries (Name, Address) VALUES ('Westside Branch', '456 West St');
+INSERT INTO Libraries (Name, Address) VALUES ('Eastside Branch', '789 East St');
 
-INSERT INTO Groups (Id, Name, BeginDate, EndDate, LessonHours) 
-VALUES (1, 'Group PB401', '2024-01-01', '2024-06-30', 120);
+INSERT INTO Books (Name, Count) VALUES ('To Kill a Mockingbird', 5);
+INSERT INTO Books (Name, Count) VALUES ('1984', 8);
+INSERT INTO Books (Name, Count) VALUES ('The Great Gatsby', 3);
 
-INSERT INTO GroupTypes (Id, Name) VALUES (1, 'Programming'), (2, 'Backend-Fullstack');
+INSERT INTO Authors (Name, Surname) VALUES ('Harper', 'Lee');
+INSERT INTO Authors (Name, Surname) VALUES ('George', 'Orwell');
+INSERT INTO Authors (Name, Surname) VALUES ('F. Scott', 'Fitzgerald');
 
-INSERT INTO Students (Id, Name, Surname, BirthDate, RegistrationDate, PhoneNumber, Email) 
-VALUES (1, 'Zaur', 'Huseynov', '2005-09-27', '2024-06-30', '1234567890', 'Zaur.Huseynov@example.com');
+INSERT INTO Genres (Name) VALUES ('Fiction');
+INSERT INTO Genres (Name) VALUES ('Science Fiction');
+INSERT INTO Genres (Name) VALUES ('Classic');
 
-INSERT INTO Topics (Id, Name, LessonHours) VALUES (1, 'C#', 30), (2, 'SQL', 25);
-
-INSERT INTO Exercises (Id, Name, Grade) 
-VALUES (1, 'Homework', 95.5), (2, 'Quiz', 88.0), (3, 'Final Project', 100.0);
-
-INSERT INTO ExerciseTypes (Id, Name) VALUES (1, 'Homework'), (2, 'Quiz'), (3, 'Final Project');
-
-SELECT * FROM Groups;
-SELECT * FROM GroupTypes;
-SELECT * FROM Students;
-SELECT * FROM Topics;
-SELECT * FROM Exercises;
-SELECT * FROM ExerciseTypes;
+SELECT * FROM Libraries;
+SELECT * FROM Books;
+SELECT * FROM Authors;
+SELECT * FROM Genres;
